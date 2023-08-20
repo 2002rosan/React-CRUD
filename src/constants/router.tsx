@@ -1,10 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import ShoppingAppLayout from "../../layout/ShoppingAppLayout";
+import HomePage from "../pages/home/HomePage";
 
 export const router = createBrowserRouter([
   {
     path: "",
-    element: <ShoppingAppLayout />,
-    children: [{}],
+    element: <HomePage />,
   },
 ]);
