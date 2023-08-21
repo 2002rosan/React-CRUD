@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   CssBaseline,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -14,6 +15,10 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import CreateIcon from "@mui/icons-material/Create";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { NavLink } from "react-router-dom";
 
 const BASE_URL = "http://localhost:8000/items";
 
@@ -33,7 +38,6 @@ const HomePage: React.FC = () => {
       const req = await axios.get(BASE_URL);
       const res = await req.data;
       setDatas(res);
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -83,6 +87,18 @@ const HomePage: React.FC = () => {
               label="store name"
               variant="outlined"
             />
+            <TextField
+              fullWidth
+              required
+              label="Manufacture Date"
+              variant="outlined"
+            />
+            <TextField
+              fullWidth
+              required
+              label="Expire Date"
+              variant="outlined"
+            />
             <Button variant="contained" color="primary">
               Add items
             </Button>
@@ -94,29 +110,54 @@ const HomePage: React.FC = () => {
             Added Items
           </Typography>
           <TableContainer component={Paper}>
-            <Table sx={{ maxWidth: 650 }}>
+            <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell align="right">Item name</TableCell>
-                  <TableCell align="right">Store name</TableCell>
-                  <TableCell align="right">Manufacture Date</TableCell>
-                  <TableCell align="right">Exprie Date</TableCell>
+                  <TableCell>#ID</TableCell>
+                  <TableCell align="left">Item name</TableCell>
+                  <TableCell align="left">Store name</TableCell>
+                  <TableCell align="left">Manufacture Date</TableCell>
+                  <TableCell align="left">Exprie Date</TableCell>
+                  <TableCell align="center">Action</TableCell>
                 </TableRow>
               </TableHead>
               {/* table contents */}
               <TableBody>
-                {datas.map((data: Idata, idx: number) => {
+                {datas.map((data: Idata) => {
                   return (
                     <TableRow
-                      key={idx}
+                      key={data.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell align="right">{data.productName}</TableCell>
-                      <TableCell align="right">{data.storeName}</TableCell>
-                      <TableCell align="right">
-                        {data.manufactureDate}
+                      <TableCell>{data.id}</TableCell>
+                      <TableCell align="left">{data.productName}</TableCell>
+                      <TableCell align="left">{data.storeName}</TableCell>
+                      <TableCell align="left">{data.manufactureDate}</TableCell>
+                      <TableCell align="left">{data.expireDate}</TableCell>
+                      <TableCell align="left">
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <NavLink to="/view">
+                            <IconButton>
+                              <VisibilityIcon color="primary" />
+                            </IconButton>
+                          </NavLink>
+                          <IconButton>
+                            <CreateIcon color="primary" />
+                          </IconButton>
+                          <IconButton>
+                            <DeleteIcon
+                              color="primary"
+                              sx={{ "&:hover": { color: "red" } }}
+                            />
+                          </IconButton>
+                        </Box>
                       </TableCell>
-                      <TableCell align="right">{data.expireDate}</TableCell>
                     </TableRow>
                   );
                 })}
