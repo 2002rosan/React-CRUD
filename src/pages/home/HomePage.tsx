@@ -32,7 +32,7 @@ export interface Idata {
 
 const HomePage: React.FC = () => {
   const [status, setStatus] = useState(false);
-  const [datas, setDatas] = useState([]);
+  const [datas, setDatas] = useState<Idata[]>([]);
   const [items, setItems] = useState({
     id: "",
     productName: "",
@@ -66,9 +66,15 @@ const HomePage: React.FC = () => {
     setStatus(true);
   };
 
-  if (status === true) {
+  if (status) {
     return <HomePage />;
   }
+
+  const handleClick = async (id: number) => {
+    await axios.delete(`http://localhost:8000/items/${id}`);
+    const updatedDatas = datas.filter((data) => data.id !== id);
+    setDatas(updatedDatas);
+  };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -214,7 +220,7 @@ const HomePage: React.FC = () => {
                                 <CreateIcon color="primary" />
                               </IconButton>
                             </NavLink>
-                            <IconButton>
+                            <IconButton onClick={() => handleClick(data.id)}>
                               <DeleteIcon
                                 color="primary"
                                 sx={{ "&:hover": { color: "red" } }}
