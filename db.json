@@ -1,40 +1,46 @@
 {
-    "items" : [
-            {
-                "id": "001",
-                "productName": "Bananas",
-                "expireDate": "2023-08-25",
-                "manufactureDate": "2023-08-15",
-                "storeName": "Fresh Mart"
-            },
-            {
-                "id": "002",
-                "productName": "Milk",
-                "expireDate": "2023-08-22",
-                "manufactureDate": "2023-08-10",
-                "storeName": "Grocery Haven"
-            },
-            {
-                "id": "003",
-                "productName": "Bread",
-                "expireDate": "2023-08-23",
-                "manufactureDate": "2023-08-18",
-                "storeName": "Super Save"
-            },
-            {
-                "id": "004",
-                "productName": "Apples",
-                "expireDate": "2023-08-28",
-                "manufactureDate": "2023-08-14",
-                "storeName": "Farmers' Market"
-            },
-            {
-                "id": "005",
-                "productName": "Eggs",
-                "expireDate": "2023-08-20",
-                "manufactureDate": "2023-08-07",
-                "storeName": "Organic Foods"
-            }
-            
-        ]
+  "items": [
+    {
+      "id": "001",
+      "productName": "Bananas Big",
+      "expireDate": "2023-08-24",
+      "manufactureDate": "2023-08-16",
+      "storeName": "Fresh Mart"
+    },
+    {
+      "id": "002",
+      "productName": "Milk",
+      "expireDate": "2023-08-22",
+      "manufactureDate": "2023-08-10",
+      "storeName": "Grocery Haven"
+    },
+    {
+      "id": "003",
+      "productName": "EGGs",
+      "expireDate": "2023-08-24",
+      "manufactureDate": "2023-08-18",
+      "storeName": "Super Save"
+    },
+    {
+      "id": "004",
+      "productName": "Apples",
+      "expireDate": "2023-08-28",
+      "manufactureDate": "2023-08-14",
+      "storeName": "Farmers' Market"
+    },
+    {
+      "id": "005",
+      "productName": "DUCK",
+      "expireDate": "2023-08-20",
+      "manufactureDate": "2023-08-07",
+      "storeName": "Organic Foods"
+    },
+    {
+      "id": "006",
+      "productName": "Potato",
+      "expireDate": "2023",
+      "manufactureDate": "2021",
+      "storeName": "Gorakha"
+    }
+  ]
 }

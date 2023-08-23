@@ -31,7 +31,15 @@ export interface Idata {
 }
 
 const HomePage: React.FC = () => {
+  const [status, setStatus] = useState(false);
   const [datas, setDatas] = useState([]);
+  const [items, setItems] = useState({
+    id: "",
+    productName: "",
+    expireDate: "",
+    manufactureDate: "",
+    storeName: "",
+  });
 
   const GetData = async () => {
     try {
@@ -46,6 +54,21 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     GetData();
   }, []);
+
+  const { id, productName, expireDate, manufactureDate, storeName } = items;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setItems({ ...items, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await axios.post(BASE_URL, items);
+    setStatus(true);
+  };
+
+  if (status === true) {
+    return <HomePage />;
+  }
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -62,7 +85,7 @@ const HomePage: React.FC = () => {
         }}
       >
         {/* add items */}
-        <form noValidate>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <Box
             sx={{
               display: "flex",
@@ -78,28 +101,60 @@ const HomePage: React.FC = () => {
             <TextField
               fullWidth
               required
-              label="item name"
+              label="item id"
               variant="outlined"
+              name="id"
+              value={id}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(e)
+              }
+            />
+
+            <TextField
+              fullWidth
+              required
+              label="product name"
+              variant="outlined"
+              name="productName"
+              value={productName}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(e)
+              }
             />
             <TextField
               fullWidth
               required
-              label="store name"
+              label="expire date"
               variant="outlined"
+              name="expireDate"
+              value={expireDate}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(e)
+              }
             />
             <TextField
               fullWidth
               required
               label="Manufacture Date"
               variant="outlined"
+              name="manufactureDate"
+              value={manufactureDate}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(e)
+              }
             />
             <TextField
               fullWidth
               required
-              label="Expire Date"
+              label="Store name"
               variant="outlined"
+              name="storeName"
+              value={storeName}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(e)
+              }
             />
-            <Button variant="contained" color="primary">
+            <Button variant="contained" type="submit" color="primary">
               Add items
             </Button>
           </Box>
